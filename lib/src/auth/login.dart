@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -19,140 +20,208 @@ class LoginFormState extends State<LoginForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(''),
-        backgroundColor: Colors.transparent,
         elevation: 0,
+        backgroundColor: const Color(0XFF121212),
+        toolbarHeight: 0,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 40, 20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Log in',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontFamily: 'Comfortaa',
-                  ),
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          // color: Color.fromARGB(255, 222, 214, 214),
+          color: Color(0XFF121212),
+        ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 0,
+          horizontal: 24,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: double.infinity,
+              alignment: Alignment.centerLeft,
+              height: 40,
+              margin: const EdgeInsets.only(
+                bottom: 40,
+              ),
+              child: GestureDetector(
+                child: SvgPicture.asset(
+                  'assets/icons/arrow_left.svg',
+                  width: 24,
+                  height: 24,
                 ),
-                const SizedBox(
-                  height: 40.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Email address',
-                      helperStyle: TextStyle(
-                        fontSize: 15,
-                      ),
-                      contentPadding: EdgeInsets.all(17),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 2,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        ),
+                onTap: () {
+                  Navigator.pop(context);
+                  // need to route login page
+                },
+              ),
+            ),
+            Flexible(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: Colors.white,
                       ),
                     ),
-                    onChanged: (value) {
-                      if (value.isEmpty) {
-                        setState(() {
-                          _isFilledEmail = false;
-                        });
-                      } else {
-                        setState(() {
-                          _isFilledEmail = true;
-                        });
-                      }
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
-                      helperStyle: TextStyle(
-                        fontSize: 15,
-                      ),
-                      contentPadding: EdgeInsets.all(17),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 2,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                        ),
+                    const SizedBox(
+                      height: 40.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: const [
+                              Text(
+                                'Username:',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Roboto',
+                                  color: Color.fromRGBO(255, 255, 255, 0.87),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          TextFormField(
+                            style: const TextStyle(color: Colors.white),
+                            decoration: const InputDecoration(
+                              hintText: 'Enter your Username',
+                              helperStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                              filled: true,
+                              fillColor: Color(0XFF1D1D1D),
+                              contentPadding: EdgeInsets.all(11),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0.0)),
+                                borderSide: BorderSide(
+                                  color: Color(0XFF979797),
+                                  width: 1,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0.0)),
+                                borderSide: BorderSide(
+                                  color: Color(0XFF979797),
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {
+                              if (value.isEmpty) {
+                                setState(() {
+                                  _isFilledEmail = false;
+                                });
+                              } else {
+                                setState(() {
+                                  _isFilledEmail = true;
+                                });
+                              }
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    onChanged: (value) {
-                      if (value.isEmpty) {
-                        setState(() {
-                          _isFilledPassword = false;
-                        });
-                      } else {
-                        setState(() {
-                          _isFilledPassword = true;
-                        });
-                      }
-                    },
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(bottom: 0.0),
-                    child: SizedBox(
-                      height: 52,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: const [
+                              Text(
+                                'Password:',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromRGBO(255, 255, 255, 0.87),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          TextFormField(
+                            style: const TextStyle(color: Colors.white),
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              hintText: 'Password',
+                              helperStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                              filled: true,
+                              fillColor: Color(0XFF1D1D1D),
+                              contentPadding: EdgeInsets.all(11),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0.0)),
+                                borderSide: BorderSide(
+                                  color: Color(0XFF979797),
+                                  width: 1,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0.0)),
+                                borderSide: BorderSide(
+                                  color: Color(0XFF979797),
+                                ),
+                              ),
+                            ),
+                            onChanged: (value) {
+                              if (value.isEmpty) {
+                                setState(() {
+                                  _isFilledPassword = false;
+                                });
+                              } else {
+                                setState(() {
+                                  _isFilledPassword = true;
+                                });
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    SizedBox(
+                      height: 48,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            minimumSize: const Size.fromHeight(50)),
+                          backgroundColor: const Color(0XFF8687E7),
+                          disabledBackgroundColor:
+                              const Color.fromRGBO(134, 135, 231, 0.5),
+                          minimumSize: const Size.fromHeight(50),
+                        ),
                         onPressed: (_isFilledEmail && _isFilledPassword)
                             ? () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.pushNamed(context, '/home');
-                                }
+                                Navigator.pop(context);
                               }
                             : null,
-                        child: Text(
-                          'log in'.toUpperCase(),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'Roboto',
-                            fontSize: 15,
+                        child: const Text(
+                          'Update',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
                           ),
                         ),
                       ),
-                    )),
-              ],
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

@@ -27,8 +27,8 @@ class Intro extends StatefulWidget {
     ),
   ];
   List<StepItem> initValue = [];
-  int currentStep = 3;
-  // int currentStep = -1;
+  // int currentStep = 3;
+  int currentStep = -1;
 
   @override
   State<Intro> createState() => _IntroState();
@@ -54,7 +54,6 @@ class _IntroState extends State<Intro> {
                     child: GestureDetector(
                       child: const IntroStart(),
                       onTap: () {
-                        debugPrint('start intro');
                         setState(() {
                           widget.currentStep += 1;
                         });
@@ -82,8 +81,7 @@ class _IntroState extends State<Intro> {
                               ),
                             ),
                             onTap: () {
-                              debugPrint('go to login page');
-                              debugPrint('SKIP tab!');
+                              Navigator.pushNamed(context, '/home');
                               // need to route login page
                             },
                           ),
@@ -155,7 +153,6 @@ class _IntroState extends State<Intro> {
                                     setState(() {
                                       widget.currentStep = lastStep;
                                     });
-                                    debugPrint('goto final');
                                   }
                                 },
                                 child: Text(
@@ -190,7 +187,6 @@ class _IntroState extends State<Intro> {
                                 height: 24,
                               ),
                               onTap: () {
-                                debugPrint('final intro');
                                 setState(() {
                                   widget.currentStep -= 1;
                                 });

@@ -27,7 +27,8 @@ class Intro extends StatefulWidget {
     ),
   ];
   List<StepItem> initValue = [];
-  int currentStep = -1;
+  int currentStep = 3;
+  // int currentStep = -1;
 
   @override
   State<Intro> createState() => _IntroState();

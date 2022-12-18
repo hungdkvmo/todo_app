@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../widgets/utils/horizontal_line.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});

@@ -3,8 +3,9 @@ import './src/intro/intro.dart';
 import './src/auth/login.dart';
 import './src/pages/home.dart';
 import './src/widgets/pokemon/pokemon_list.dart';
+import 'src/auth/login.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const PokemonList(),
+        '/': (context) => const LoginForm(),
+        // '/': (context) => const PokemonList(),
         // '/': (context) => Intro(),
         '/login': (context) => const LoginForm(),
         '/home': (context) => const Home(),

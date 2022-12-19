@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/src/auth/google_sigin_button.dart';
+import 'package:todo_app/src/utils/authentication.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -252,36 +254,24 @@ class LoginFormState extends State<LoginForm> {
                             )),
                       ),
                     ]),
-                    SizedBox(
-                      height: 48,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          minimumSize: const Size.fromHeight(50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            side: const BorderSide(
-                              color: Color(0XFF8875FF),
-                              width: 1.0,
-                            ),
+                    FutureBuilder(
+                      future: Authentication.initializeFirebase(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return const Text(
+                            'Error initializing Firebase',
+                            style: TextStyle(color: Colors.white),
+                          );
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          return const GoogleSignInButton();
+                        }
+                        return const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.orange,
                           ),
-                        ),
-                        icon: SvgPicture.asset(
-                          'assets/icons/google.svg',
-                          width: 24,
-                          height: 24,
-                        ), //icon data for elevate
-                        onPressed: () {
-                          // login with google
-                        },
-                        label: const Text(
-                          'Login with Google',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 24,

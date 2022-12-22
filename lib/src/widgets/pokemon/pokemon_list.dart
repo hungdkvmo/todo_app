@@ -41,8 +41,6 @@ Future<List<Pokemon>> fetchPokeList() async {
     }
     return pokeList;
   } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
     throw Exception('Failed to load album');
   }
 }
@@ -67,7 +65,14 @@ class _PokemonListState extends State<PokemonList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fetch Data Example'),
+        title: const Text('Pokemon gen 1st list'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          iconSize: 20.0,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: Center(
         child: FutureBuilder<List<Pokemon>>(
@@ -75,19 +80,31 @@ class _PokemonListState extends State<PokemonList> {
           builder: (context, snapshot) {
             return ListView.separated(
               itemBuilder: (context, index) {
-                return Expanded(
-                  child: Column(
-                    children: [
-                      Text('Id ${snapshot.data![index].name}'),
-                      Text('Url ${snapshot.data![index].url}'),
-                      Text('Name ${snapshot.data![index].name}'),
-                    ],
+                if (snapshot.hasError) {
+                  return const Text(
+                    'Error fetching data',
+                    style: TextStyle(color: Colors.white),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  return Expanded(
+                    child: Column(
+                      children: [
+                        Text('Id ${snapshot.data![index].name}'),
+                        Text('Url ${snapshot.data![index].url}'),
+                        Text('Name ${snapshot.data![index].name}'),
+                      ],
+                    ),
+                  );
+                }
+                return const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.orange,
                   ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
-              itemCount: snapshot.data!.length,
+              itemCount: snapshot.data?.length ?? 0,
             );
           },
         ),
